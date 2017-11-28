@@ -18,6 +18,7 @@ public class MyArrayTest {
     @Before
     public void init() {
         myArray = new MyArray();
+        testInsert();
     }
 
     // 插入数据测试
@@ -25,6 +26,20 @@ public class MyArrayTest {
     public void test() {
         myArray.insert(20);
         System.out.println("----:\t" + myArray.get(0));
+    }
+
+    @Test
+    public void testInsert() {
+        myArray.insert(20);
+        myArray.insert(10);
+        myArray.insert(5);
+        myArray.insert(30);
+    }
+
+    // 显示/打印数组里的内容
+    @Test
+    public void testDisplay() {
+        myArray.display();
     }
 
 }
