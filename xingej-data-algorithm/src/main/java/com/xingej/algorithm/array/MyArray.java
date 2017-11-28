@@ -92,4 +92,13 @@ public class MyArray {
         elements--;
     }
 
+    // 更新值
+    public void update(int index, long newValue) {
+        if (index >= elements || index < 0) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+
+        arr[index] = newValue;
+    }
+
 }

@@ -60,4 +60,10 @@ public class MyArrayTest {
         myArray.display();
     }
 
+    @Test
+    public void testUpdate() {
+        myArray.update(2, 100);
+        System.out.println("---更新之后的值----：\t" + myArray.get(2));
+    }
+
 }
