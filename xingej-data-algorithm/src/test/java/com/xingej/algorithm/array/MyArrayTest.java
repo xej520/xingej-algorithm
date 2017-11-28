@@ -42,4 +42,22 @@ public class MyArrayTest {
         myArray.display();
     }
 
+    // 显示/打印数组里的内容
+    @Test
+    public void testGetIndexByValue() {
+        System.out.println("---索引值是:\t" + myArray.getIndexByValue(20));
+    }
+
+    // 根据下标，来删除指定位置的元素
+    @Test
+    public void testDelete() {
+        System.out.println("---删除之前打印数组里的元素------");
+        myArray.display();
+
+        myArray.delete(5);
+
+        System.out.println("---删除之后打印数组里的元素------");
+        myArray.display();
+    }
+
 }

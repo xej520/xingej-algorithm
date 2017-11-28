@@ -62,4 +62,34 @@ public class MyArray {
         System.out.println("]");
     }
 
+    // 根据输入的值，来返回 索引值
+    public int getIndexByValue(long value) {
+
+        int i = 0;
+
+        for (; i < elements; i++) {
+            if (arr[i] == value) {
+                // 如果找到的话，就立即返回索引值
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    // 根据索引值，来删除数组里的元素
+    public void delete(int index) {
+        if (index >= elements || index < 0) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+
+        // 将后面的元素，往前移动
+        for (int i = index; i < elements; i++) {
+            arr[i] = arr[i + 1];
+        }
+
+        // 最后，将有效值，减一
+        elements--;
+    }
+
 }
