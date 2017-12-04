@@ -1,4 +1,4 @@
-package com.xingej.algorithm.array;
+package com.xingej.algorithm.datastructure.array;
 
 /**
  * 面向对象编程
