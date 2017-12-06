@@ -3,6 +3,8 @@ package com.xingej.algorithm.array;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.xingej.algorithm.datastructure.array.MyArray;
+
 /**
  * 面向对象编程，
  * 
