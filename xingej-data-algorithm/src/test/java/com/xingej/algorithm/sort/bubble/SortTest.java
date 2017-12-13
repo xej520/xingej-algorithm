@@ -3,7 +3,7 @@ package com.xingej.algorithm.sort.bubble;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.xingej.algorithm.sort.selection.SortUtils;
+import com.xingej.algorithm.sort.SortUtils;
 
 public class SortTest {
 
