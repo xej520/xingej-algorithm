@@ -14,7 +14,7 @@ public class SortTest {
     public void initArray() {
         arr[0] = 3;
         arr[1] = 1;
-        arr[2] = 8;
+        arr[2] = 11;
         arr[3] = 10;
         arr[4] = 9;
 
@@ -40,6 +40,16 @@ public class SortTest {
     public void testByBubbleSort() {
 
         SortUtils.bubbleSort(arr);
+
+        System.out.println("------排序后-----");
+
+        show(arr);
+    }
+
+    @Test
+    public void testBySelectionSort() {
+
+        SortUtils.selectSort(arr);
 
         System.out.println("------排序后-----");
 
