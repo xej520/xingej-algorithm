@@ -1,9 +1,7 @@
-package com.xingej.algorithm.sort.bubble;
+package com.xingej.algorithm.sort;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import com.xingej.algorithm.sort.SortUtils;
 
 public class SortTest {
 
@@ -22,6 +20,7 @@ public class SortTest {
         show(arr);
     }
 
+    // -----打印输出
     /**
      * 打印输出数组
      * 
@@ -36,6 +35,7 @@ public class SortTest {
         System.out.println();
     }
 
+    // -----冒泡排序
     @Test
     public void testByBubbleSort() {
 
@@ -46,10 +46,22 @@ public class SortTest {
         show(arr);
     }
 
+    // -----选择排序
     @Test
     public void testBySelectionSort() {
 
         SortUtils.selectSort(arr);
+
+        System.out.println("------排序后-----");
+
+        show(arr);
+    }
+
+    // -----插入排序
+    @Test
+    public void testByInsertSort() {
+
+        SortUtils.insertSort(arr);
 
         System.out.println("------排序后-----");
 
