@@ -119,4 +119,43 @@ public class SortUtils {
         }
     }
 
+    // --------4、希尔排序------
+    public static void shellSort(int[] arr) {
+        int left; // 左边下标，表示，已经排序好的元素
+        int right; // 右边下标，表示，待排序元素/就是没有排序的元素
+
+        int temp; // 临时存储
+
+        int h = 1; // 初始间隔为1；
+
+        // 计算最大间隔
+        while (h < arr.length / 3) {
+            h = 3 * h + 1;
+        }
+
+        while (h > 0) {
+            // 表示循环待排序的元素
+            for (right = h; right < arr.length; right++) {
+                temp = arr[right]; // 先将待排序的元素，进行缓存一下
+                left = right; //
+
+                // 为什么是left>h-1,
+                // 目前我认为是，保证arr[left-h] 得有值，不能为空，或者说，报空指针异常吧
+                while (left > h - 1 && arr[left - h] >= temp) {
+                    arr[left] = arr[left - h];
+                    left = left - h;
+                }
+
+                // 这里，千万不要写成下面的形式, 不能再left-h，因为，上面的while()循环，已经减去了
+                // arr[left - h] = temp;
+
+                arr[left] = temp;
+            }
+
+            // 重新调整排序间隔
+            h = (h - 1) / 3;
+        }
+
+    }
+
 }

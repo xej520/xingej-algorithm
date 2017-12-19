@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class SortTest {
 
-    private int[] arr = new int[5];
+    private int[] arr = new int[6];
 
     // 初始化数组
     @Before
@@ -15,6 +15,7 @@ public class SortTest {
         arr[2] = 11;
         arr[3] = 10;
         arr[4] = 9;
+        arr[5] = 9;
 
         System.out.println("------排序前-----");
         show(arr);
@@ -28,7 +29,7 @@ public class SortTest {
      */
     private void show(int[] arr) {
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 6; i++) {
             System.out.print(arr[i] + " ");
         }
 
@@ -62,6 +63,17 @@ public class SortTest {
     public void testByInsertSort() {
 
         SortUtils.insertSort(arr);
+
+        System.out.println("------排序后-----");
+
+        show(arr);
+    }
+
+    // -----希尔排序
+    @Test
+    public void testByShellSort() {
+
+        SortUtils.shellSort(arr);
 
         System.out.println("------排序后-----");
 
