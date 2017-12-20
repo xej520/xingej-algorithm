@@ -155,7 +155,95 @@ public class SortUtils {
             // 重新调整排序间隔
             h = (h - 1) / 3;
         }
+    }
 
+    // --------5、快速排序------
+    public static void quickSort(int arr[]) {
+        recQuickSort(arr, 0, arr.length - 1);
+    }
+
+    // 使用递归和划分技术进行快速排序
+    private static void recQuickSort(int arr[], int left, int right) {
+        int size = right - left + 1;
+
+        if (size < 10) {
+            insertSort(arr, left, right);
+        } else {
+            int median = medianof3(arr, left, right);
+            int partition = partitionIt(arr, left, right, median);
+            recQuickSort(arr, left, partition - 1);
+            recQuickSort(arr, partition + 1, right);
+        }
+
+    }
+
+    // 划分方法，返回分割点的索引
+    private static int partitionIt(int arr[], int left, int right, int pivot) {
+        int leftPtr = left;
+        int rightPtr = right - 1;
+
+        while (true) {
+            // 从左往右找大于特定值的
+            while (arr[++leftPtr] < pivot)
+                ; // 循环结束，就代表，找到一个大于特定值的数据项
+
+            // 从右向左找小于特定值
+            while (arr[--rightPtr] > pivot)
+                ;
+
+            if (leftPtr >= rightPtr) {
+                break; // 结束时，leftPtr = rightPtr
+            } else {
+                swap(arr, leftPtr, rightPtr); // 交换
+            }
+
+        }
+
+        swap(arr, leftPtr, right - 1);
+
+        return leftPtr;
+    }
+
+    // 找出中间值
+    // 索引为left，right，以及中间值的 进行排序，
+    private static int medianof3(int arr[], int left, int right) {
+        int centerIndex = (left + right) / 2;
+
+        if (arr[left] > arr[centerIndex]) {
+            swap(arr, left, centerIndex);
+        }
+
+        if (arr[left] > arr[right]) {
+            swap(arr, left, right);
+        }
+
+        if (arr[centerIndex] > arr[right]) {
+            swap(arr, centerIndex, right);
+        }
+
+        swap(arr, centerIndex, right - 1);
+
+        return arr[right - 1];
+    }
+
+    private static void insertSort(int arr[], int left, int right) {
+        int in, out;
+        int temp; // 临时缓存，待存储的元素
+        for (out = left + 1; out <= right; out++) {
+            temp = arr[out];
+            in = out;
+            while (in > left && arr[in - 1] >= temp) {
+                arr[in] = arr[in - 1];
+                in--;
+            }
+            arr[in] = temp;
+        }
+    }
+
+    private static void swap(int arr[], int left, int right) {
+        int temp = arr[left];
+        arr[left] = arr[right];
+        arr[right] = temp;
     }
 
 }

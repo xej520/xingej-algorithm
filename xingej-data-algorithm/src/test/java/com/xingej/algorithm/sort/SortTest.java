@@ -5,19 +5,19 @@ import org.junit.Test;
 
 public class SortTest {
 
-    private int[] arr = new int[6];
+    private int max = 20;
+    private int[] arr = new int[max];
 
     // 初始化数组
     @Before
     public void initArray() {
-        arr[0] = 3;
-        arr[1] = 1;
-        arr[2] = 11;
-        arr[3] = 10;
-        arr[4] = 9;
-        arr[5] = 9;
+
+        for (int i = 0; i < max; i++) {
+            arr[i] = (int) (Math.random() * 100 + 1);
+        }
 
         System.out.println("------排序前-----");
+
         show(arr);
     }
 
@@ -29,7 +29,7 @@ public class SortTest {
      */
     private void show(int[] arr) {
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < max; i++) {
             System.out.print(arr[i] + " ");
         }
 
@@ -74,6 +74,16 @@ public class SortTest {
     public void testByShellSort() {
 
         SortUtils.shellSort(arr);
+
+        System.out.println("------排序后-----");
+
+        show(arr);
+    }
+
+    // -----快速排序
+    @Test
+    public void testByQuickSort() {
+        SortUtils.quickSort(arr);
 
         System.out.println("------排序后-----");
 
