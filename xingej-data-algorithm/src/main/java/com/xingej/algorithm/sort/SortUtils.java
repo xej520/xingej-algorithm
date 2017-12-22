@@ -1,5 +1,8 @@
 package com.xingej.algorithm.sort;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 /**
  * 排序工具类
  * 
@@ -319,6 +322,58 @@ public class SortUtils {
         for (i = 0; i < n; i++) {
             arr[lowerBound + i] = workSpace[i];
         }
+    }
+
+    // --------7、桶排序------
+    /**
+     * 使用场景：
+     * 
+     * 1、桶排序，可使用于最大最小值相差较大的数据情况，如{2,100,200,198,3,87}
+     * 
+     * 2、被排序的数据元素，最好分配均匀，否则可能会导致数据都集中到一个桶中，如{102,108,111,204,3000}
+     * 
+     */
+    public static void bucketSort(int arr[]) {
+        int max = Integer.MIN_VALUE; // 先赋值成最小值
+        int min = Integer.MAX_VALUE;
+
+        // 一次循环，将该数组的最大值，最小值求出来
+        for (int i = 0; i < arr.length; i++) {
+            max = Math.max(max, arr[i]);
+            min = Math.min(min, arr[i]);
+        }
+
+        // 求桶数
+        int bucketNum = (max - min) / (arr.length) + 1;
+
+        // 初始化每个桶
+        ArrayList<ArrayList<Integer>> bucketArr = new ArrayList<>();
+        for (int i = 0; i < bucketNum; i++) {
+            bucketArr.add(new ArrayList<>());
+        }
+
+        // 遍历数组，将每个元素放入桶中
+        for (int i = 0; i < arr.length; i++) {
+            int bucketIndex = (arr[i] - min) / (arr.length);
+
+            bucketArr.get(bucketIndex).add(arr[i]);
+        }
+
+        // 对每个桶元素，进行排序
+        for (int i = 0; i < bucketArr.size(); i++) {
+            Collections.sort(bucketArr.get(i));
+        }
+
+        // 将已经排序好的元素，重新赋值到arr数组里
+        int j = 0;
+        // 遍历每个桶，将每个桶的元素，赋值到arr数组里
+        for (int i = 0; i < bucketArr.size(); i++) {
+            ArrayList<Integer> arrayList = bucketArr.get(i);
+            for (Integer key : arrayList) {
+                arr[j++] = key;
+            }
+        }
+
     }
 
 }

@@ -100,4 +100,14 @@ public class SortTest {
         show(arr);
     }
 
+    // -----桶排序
+    @Test
+    public void testByBucketSort() {
+        SortUtils.bucketSort(arr);
+
+        System.out.println("------排序后-----");
+
+        show(arr);
+    }
+
 }
