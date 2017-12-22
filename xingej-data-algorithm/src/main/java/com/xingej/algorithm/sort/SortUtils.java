@@ -332,6 +332,18 @@ public class SortUtils {
      * 
      * 2、被排序的数据元素，最好分配均匀，否则可能会导致数据都集中到一个桶中，如{102,108,111,204,3000}
      * 
+     * 基本步骤：
+     * 
+     * 1.找出待排序数组中的最大值max、最小值min
+     * 
+     * 2.我们使用 动态数组ArrayList 作为桶，桶里放的元素也用 ArrayList存储。桶的数量为(max-min)/arr.length+1
+     * 
+     * 3.遍历数组 arr，计算每个元素 arr[i] 放的桶
+     * 
+     * 4.每个桶各自排序
+     * 
+     * 5.遍历桶数组，把排序好的元素放进输出数组
+     * 
      */
     public static void bucketSort(int arr[]) {
         int max = Integer.MIN_VALUE; // 先赋值成最小值
