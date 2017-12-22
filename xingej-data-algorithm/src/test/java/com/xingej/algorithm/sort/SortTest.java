@@ -90,4 +90,14 @@ public class SortTest {
         show(arr);
     }
 
+    // -----归并排序
+    @Test
+    public void testByMergeSort() {
+        SortUtils.mergeSort(arr);
+
+        System.out.println("------排序后-----");
+
+        show(arr);
+    }
+
 }

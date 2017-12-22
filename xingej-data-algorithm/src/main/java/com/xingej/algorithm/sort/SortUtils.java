@@ -246,4 +246,79 @@ public class SortUtils {
         arr[right] = temp;
     }
 
+    // --------6、归并排序------
+
+    // 归并两个已经有序的数组
+    // 首先将数组，拆分成两部分，左边做成有序的，同样，右边也做成有序的。
+    // 将这两个有序的数组，组合生成第3个有序的数组，
+    // 时间复杂度O(N*logN)
+    // 缺点：消耗内存；
+    public static void mergeSort(int arr[]) {
+        // 生成临时的缓存数组，用于临时排序
+        int[] workSpace = new int[arr.length];
+
+        recMergeSort(arr, workSpace, 0, arr.length - 1);
+    }
+
+    // lowerBound，upperBound 全是数组下标
+    private static void recMergeSort(int arr[], int workSpace[], int lowerBound, int upperBound) {
+        if (lowerBound == upperBound) {
+            return;
+        } else {
+            int mid = (lowerBound + upperBound) / 2;
+            // 递归前半部分
+            recMergeSort(arr, workSpace, lowerBound, mid);
+            // 递归后半部分
+            recMergeSort(arr, workSpace, mid + 1, upperBound);
+            // 进行合并
+            merge(arr, workSpace, lowerBound, mid + 1, upperBound);
+
+        }
+    }
+
+    /**
+     * 
+     * @param arr
+     *            被排序的数组
+     * @param workSpace
+     *            临时缓存，进行排序的
+     * @param lowPtr
+     *            前半部分，最小下标
+     * @param highPtr
+     *            后半部分，最小下标
+     * @param upperBound
+     *            后半部分，最大下标
+     */
+    private static void merge(int arr[], int workSpace[], int lowPtr, int highPtr, int upperBound) {
+        int i = 0;
+
+        int lowerBound = lowPtr;// 前半部分的最小下标，进行缓存
+
+        int mid = highPtr - 1;
+
+        int n = upperBound - lowerBound + 1;
+
+        while (lowPtr <= mid && highPtr <= upperBound) {
+            if (arr[lowPtr] < arr[highPtr]) {
+                workSpace[i++] = arr[lowPtr++];
+            } else {
+                workSpace[i++] = arr[highPtr++];
+            }
+        }
+
+        // 前半部分或者后半部分，可能还存在未排序的元素，需要写到workSpace里
+        while (lowPtr <= mid) {
+            workSpace[i++] = arr[lowPtr++];
+        }
+
+        while (highPtr <= upperBound) {
+            workSpace[i++] = arr[highPtr++];
+        }
+
+        // 将排序好的元素数组workSpace，重新赋值到arr数组里
+        for (i = 0; i < n; i++) {
+            arr[lowerBound + i] = workSpace[i];
+        }
+    }
+
 }
