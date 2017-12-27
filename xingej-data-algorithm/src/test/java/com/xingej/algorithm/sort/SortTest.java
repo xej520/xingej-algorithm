@@ -110,4 +110,11 @@ public class SortTest {
         show(arr);
     }
 
+    // -----堆排序,时间复杂度是O(logN)
+    @Test
+    public void testByHeapSort() {
+        SortUtils.heapSort(arr);
+
+    }
+
 }

@@ -388,4 +388,169 @@ public class SortUtils {
 
     }
 
+    // --------8、堆排序------
+    // 堆特点：
+    // 1、它是完全的二叉树，除了树的最后一层节点不需要是满的，其他的每一层从左到右都完全是满的
+    // 2、它常常是用一个数组来实现堆的
+    // 3、堆中的每一个节点都满足的条件是，父节点的关键字要大于所有的子节点
+    public static void heapSort(int arr[]) {
+        int size = arr.length;
+
+        Heap heap = new Heap(size);
+
+        for (int i = 0; i < size; i++) {
+            Node node = new Node(arr[i]);
+
+            heap.insertAt(i, node);
+
+            heap.incrementSize();// 数量递增
+        }
+
+        // 从最后一个元素的父节点开始向下调整，一直到根
+        // 调整完后，就变成标准的堆了
+        for (int j = size / 2 - 1; j >= 0; j--) {
+            heap.trickleDown(j);
+        }
+
+        // 通过循环删除最大项，再把删除的数据，数组中的指定的位置，如从后往前方；
+        // 结果就是从小到大排序
+        for (int j = size - 1; j >= 0; j--) {
+            Node biggestNode = heap.remove();// 取出最大的数据项
+            heap.insertAt(j, biggestNode);
+        }
+
+        System.out.println("----打印排序后的堆----");
+        heap.displayArray();
+    }
+
+    // 堆排序，
+    // 堆是二叉树，因此，需要创建这个节点，来存储数据
+    // 堆的特点：父节点的值要大于子节点，左右子节点大小无关系，不要求左子节点小于右子节点
+    static class Node {
+        private int iData;
+
+        public Node(int key) {
+            iData = key;
+        }
+
+        public int getKey() {
+            return iData;
+        }
+
+        public void setKey(int id) {
+            iData = id;
+        }
+    }
+
+    // 创建堆
+    static class Heap {
+
+        private Node[] heapArray;
+
+        private int maxSize;
+
+        private int currentSize;
+
+        public Heap(int mx) {
+            maxSize = mx;
+            currentSize = 0;
+            heapArray = new Node[maxSize];
+        }
+
+        public boolean isEmpty() {
+            return currentSize == 0;
+        }
+
+        // 插入指定的位置
+        public void insertAt(int index, Node node) {
+            heapArray[index] = node;
+        }
+
+        public void incrementSize() {
+            currentSize++;
+        }
+
+        public Node remove() {
+            Node root = heapArray[0];
+
+            heapArray[0] = heapArray[--currentSize];// 把最后一个元素，赋值到根元素上
+
+            trickleDown(0);// 开始向下调整
+
+            return root;
+        }
+
+        // 向下调整
+        public void trickleDown(int index) {
+            int largerChild;
+            Node top = heapArray[index];
+            while (index < currentSize / 2) {
+                int leftChild = 2 * index + 1;
+                int rightChild = leftChild + 1;
+                if (rightChild < currentSize && heapArray[leftChild].getKey() < heapArray[rightChild].getKey()) {
+                    largerChild = rightChild;
+                } else {
+                    largerChild = leftChild;
+                }
+
+                if (top.getKey() >= heapArray[largerChild].getKey()) {
+                    break;
+                }
+
+                heapArray[index] = heapArray[largerChild];
+                index = largerChild;
+            }
+            heapArray[index] = top;
+        }
+
+        // 树状的方式，显示堆
+        public void displayHeap() {
+            int nBlanks = 32;
+            int itemsPerRow = 1;// 层数判断
+            int column = 0;
+            int j = 0;
+            String dots = "-------------------------";
+
+            System.out.println(dots + dots);
+
+            while (currentSize > 0) {
+                if (column == 0) {
+                    for (int k = 0; k < nBlanks; k++) {
+                        System.out.print(' ');
+                    }
+
+                    System.out.print(heapArray[j].getKey());
+
+                    if (++j == currentSize) {
+                        break;// 所有的数据项，全部显示完毕了
+                    }
+
+                    if (++column == itemsPerRow) {
+                        nBlanks /= 2;
+                        itemsPerRow *= 2;
+                        column = 0;
+                        System.out.println();
+                    } else {
+                        for (int k = 0; k < nBlanks * 2 - 2; k++) {
+                            System.out.print(' ');
+                        }
+                    }
+
+                }
+            }
+
+            System.out.println("\n" + dots + dots);
+
+        }
+
+        // 以数组的方式，来显示堆
+        public void displayArray() {
+            for (int j = 0; j < maxSize; j++) {
+                System.out.print(heapArray[j].getKey() + " ");
+            }
+
+            System.out.println();
+        }
+
+    }
 }
